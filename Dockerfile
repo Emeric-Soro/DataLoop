@@ -6,8 +6,10 @@ RUN apt-get update \
     unzip \
     libzip-dev \
     libicu-dev \
-    && docker-php-ext-install pdo pdo_mysql bcmath intl zip \
-    && a2dismod mpm_event mpm_worker || true \
+    libonig-dev \
+    libxml2-dev \
+    && docker-php-ext-install pdo pdo_mysql bcmath intl zip mbstring xml \
+    && (a2dismod mpm_event mpm_worker || true) \
     && a2enmod mpm_prefork rewrite \
     && rm -rf /var/lib/apt/lists/*
 
@@ -20,6 +22,7 @@ WORKDIR /var/www/html
 
 # Install PHP dependencies first for better layer caching.
 COPY composer.json composer.lock* ./
+ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN composer install \
     --no-dev \
     --prefer-dist \
