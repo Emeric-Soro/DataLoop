@@ -72,6 +72,69 @@ php artisan serve
 
 Le projet inclut un `docker-compose.yml` (app + mysql + phpmyadmin). Pour un usage Docker, adapter `DB_HOST` a `db` dans `.env`.
 
+## Deploiement sur Railway
+
+Le projet est deployable via le `Dockerfile` du repo.
+
+### 1. Creer les services Railway
+
+- Service 1: Backend (ce repo)
+- Service 2: MySQL (plugin Railway)
+
+### 2. Variables d'environnement a definir (service Backend)
+
+Minimum recommande:
+
+```env
+APP_NAME=DataLoop
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://<ton-domaine-railway>
+APP_KEY=base64:...
+
+LOG_CHANNEL=stack
+LOG_LEVEL=info
+
+DB_CONNECTION=mysql
+DB_HOST=<MYSQLHOST>
+DB_PORT=<MYSQLPORT>
+DB_DATABASE=<MYSQLDATABASE>
+DB_USERNAME=<MYSQLUSER>
+DB_PASSWORD=<MYSQLPASSWORD>
+
+SESSION_DRIVER=database
+CACHE_STORE=database
+QUEUE_CONNECTION=database
+FILESYSTEM_DISK=local
+```
+
+Notes:
+
+- Les valeurs `MYSQL*` sont fournies automatiquement par Railway sur le service MySQL.
+- Renseigner `APP_KEY` (genere localement avec `php artisan key:generate --show`).
+
+### 3. Build et demarrage
+
+- Railway detecte le `Dockerfile` et build l'image automatiquement.
+- Le serveur web demarre avec Apache (`apache2-foreground`).
+
+### 4. Initialisation base de donnees (une fois apres premier deploy)
+
+Dans le shell Railway du service Backend:
+
+```bash
+php artisan migrate --force
+php artisan db:seed --force
+php artisan storage:link
+php artisan l5-swagger:generate
+```
+
+### 5. Verification rapide
+
+- Ouvrir `/api/v1/auth/login` via ton client API.
+- Ouvrir `/api/documentation` pour Swagger.
+- Verifier les logs Railway en cas d'erreur 500.
+
 ## Prefixes API
 
 - Public auth: `/api/v1/auth/*`

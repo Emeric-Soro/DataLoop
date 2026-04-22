@@ -7,7 +7,8 @@ RUN apt-get update \
     libzip-dev \
     libicu-dev \
     && docker-php-ext-install pdo pdo_mysql bcmath intl zip \
-    && a2enmod rewrite \
+    && a2dismod mpm_event mpm_worker || true \
+    && a2enmod mpm_prefork rewrite \
     && rm -rf /var/lib/apt/lists/*
 
 RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf \
@@ -16,3 +17,25 @@ RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-avail
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
+
+# Install PHP dependencies first for better layer caching.
+COPY composer.json composer.lock* ./
+RUN composer install \
+    --no-dev \
+    --prefer-dist \
+    --no-interaction \
+    --no-progress \
+    --optimize-autoloader \
+    --no-scripts
+
+# Copy the full application source.
+COPY . .
+
+# Prepare writable directories for Laravel runtime.
+RUN mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views storage/logs bootstrap/cache \
+    && chown -R www-data:www-data storage bootstrap/cache \
+    && chmod -R ug+rwx storage bootstrap/cache
+
+EXPOSE 80
+
+CMD ["apache2-foreground"]
