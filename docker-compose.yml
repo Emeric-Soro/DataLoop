@@ -1,0 +1,47 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dataloop_app
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8.0
+    container_name: dataloop_db
+    environment:
+      MYSQL_DATABASE: dataloop
+      MYSQL_USER: dataloop
+      MYSQL_PASSWORD: dataloop_pwd
+      MYSQL_ROOT_PASSWORD: root_pwd
+    ports:
+      - "3307:3306"
+    volumes:
+      - dataloop_db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot_pwd"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5
+    container_name: dataloop_phpmyadmin
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root_pwd
+    ports:
+      - "8081:80"
+
+volumes:
+  dataloop_db_data:

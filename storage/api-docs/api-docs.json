@@ -1,0 +1,985 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "DataLoop API",
+        "description": "Documentation API DataLoop pour le hackathon",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "/",
+            "description": "Serveur local"
+        }
+    ],
+    "paths": {
+        "/api/v1/auth/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Inscription",
+                "description": "Format recommande: name, telephone, email, password. Compatibilite legacy: nom et mot_de_passe aussi acceptes.",
+                "operationId": "2364e7afe8828b713e648b9bfce2f222",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "telephone",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Kouadio Yao",
+                                        "maxLength": 255
+                                    },
+                                    "telephone": {
+                                        "type": "string",
+                                        "example": "+2250700000000",
+                                        "maxLength": 20
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@example.com",
+                                        "nullable": true
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "MotDePasse123!",
+                                        "minLength": 8
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Inscription reussie"
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Connexion",
+                "description": "Format recommande: telephone + password. Compatibilite legacy: mot_de_passe aussi accepte.",
+                "operationId": "1eaad5044f49331e2e4a269354b56d7b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "telephone",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "telephone": {
+                                        "type": "string",
+                                        "example": "+2250700000000",
+                                        "maxLength": 20
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "MotDePasse123!",
+                                        "minLength": 8
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Connexion reussie"
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/otp/send": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Envoyer OTP",
+                "operationId": "1451e610b226bf7cf381909d02bffca9",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OTP envoye"
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/otp/verify": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Verifier OTP",
+                "operationId": "7f526575d000d72552e3421a2f5ffc47",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OTP verifie"
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Deconnexion",
+                "operationId": "f429f77c76ed94c688e77779a9621005",
+                "responses": {
+                    "200": {
+                        "description": "Deconnecte"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/auth/me": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Profil connecte",
+                "operationId": "21900d7507dd7fa34d2eca27483f1c17",
+                "responses": {
+                    "200": {
+                        "description": "Profil"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/tasks/next": {
+            "get": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Prochaine tache",
+                "operationId": "2af663e4000ed096801fe810a89e1503",
+                "parameters": [
+                    {
+                        "name": "count",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/tasks": {
+            "get": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Lister toutes les taches (pagine)",
+                "operationId": "a64c87743127164e51b9235d26713a4c",
+                "parameters": [
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 20,
+                            "maximum": 100,
+                            "minimum": 1
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1,
+                            "minimum": 1
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "nouvelle",
+                                "en_cours",
+                                "terminee"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Liste paginee des taches",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 12
+                                                    },
+                                                    "type_tache": {
+                                                        "type": "string",
+                                                        "example": "classification_image"
+                                                    },
+                                                    "question": {
+                                                        "type": "string",
+                                                        "example": "Que montre cette image ?"
+                                                    },
+                                                    "options_reponse": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "example": [
+                                                            "chat",
+                                                            "chien",
+                                                            "voiture"
+                                                        ]
+                                                    },
+                                                    "nb_annotations_requises": {
+                                                        "type": "integer",
+                                                        "example": 3
+                                                    },
+                                                    "statut": {
+                                                        "type": "string",
+                                                        "example": "nouvelle"
+                                                    },
+                                                    "is_sentinelle": {
+                                                        "type": "boolean",
+                                                        "example": false
+                                                    },
+                                                    "image": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 42,
+                                                                "nullable": true
+                                                            },
+                                                            "url_stockage": {
+                                                                "type": "string",
+                                                                "example": "images/task-42.jpg",
+                                                                "nullable": true
+                                                            },
+                                                            "categorie": {
+                                                                "type": "string",
+                                                                "example": "animaux",
+                                                                "nullable": true
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "annotations_count": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2026-04-22T09:30:00.000000Z"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "links": {
+                                            "properties": {
+                                                "first": {
+                                                    "type": "string",
+                                                    "example": "http://localhost:8000/api/v1/tasks?page=1",
+                                                    "nullable": true
+                                                },
+                                                "last": {
+                                                    "type": "string",
+                                                    "example": "http://localhost:8000/api/v1/tasks?page=5",
+                                                    "nullable": true
+                                                },
+                                                "prev": {
+                                                    "type": "string",
+                                                    "example": null,
+                                                    "nullable": true
+                                                },
+                                                "next": {
+                                                    "type": "string",
+                                                    "example": "http://localhost:8000/api/v1/tasks?page=2",
+                                                    "nullable": true
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "properties": {
+                                                "current_page": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "from": {
+                                                    "type": "integer",
+                                                    "example": 1,
+                                                    "nullable": true
+                                                },
+                                                "last_page": {
+                                                    "type": "integer",
+                                                    "example": 5
+                                                },
+                                                "path": {
+                                                    "type": "string",
+                                                    "example": "http://localhost:8000/api/v1/tasks"
+                                                },
+                                                "per_page": {
+                                                    "type": "integer",
+                                                    "example": 20
+                                                },
+                                                "to": {
+                                                    "type": "integer",
+                                                    "example": 20,
+                                                    "nullable": true
+                                                },
+                                                "total": {
+                                                    "type": "integer",
+                                                    "example": 96
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/tasks/{id}/annotate": {
+            "post": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Soumettre annotation",
+                "operationId": "95bd291b6a5d626a0da4840cda8fe009",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "reponse_choisie",
+                                    "temps_execution_ms"
+                                ],
+                                "properties": {
+                                    "reponse_choisie": {
+                                        "type": "string",
+                                        "example": "chat",
+                                        "maxLength": 255
+                                    },
+                                    "temps_execution_ms": {
+                                        "type": "integer",
+                                        "example": 1850,
+                                        "minimum": 0
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Cree"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/tasks/{id}/skip": {
+            "post": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Passer tache",
+                "operationId": "1ddb5de34f4f446c7f25603a32060206",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/tasks/history": {
+            "get": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Historique",
+                "operationId": "d1653bbf267d6e1707113b3f3cc64cf5",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/tasks/{id}": {
+            "get": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Detail tache",
+                "operationId": "842d7327ec015aa768a2855978a9bec4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/wallet/balance": {
+            "get": {
+                "tags": [
+                    "Wallet"
+                ],
+                "summary": "Solde",
+                "operationId": "aa32a2860c424dd35e4737f465447d3c",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/wallet/transactions": {
+            "get": {
+                "tags": [
+                    "Wallet"
+                ],
+                "summary": "Transactions",
+                "operationId": "787d7d91f1309459213ecad79340cfe1",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/wallet/withdraw": {
+            "post": {
+                "tags": [
+                    "Wallet"
+                ],
+                "summary": "Retrait",
+                "operationId": "055e1c3f86838270e441a315dbba779f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "montant",
+                                    "methode_paiement"
+                                ],
+                                "properties": {
+                                    "montant": {
+                                        "type": "number",
+                                        "example": 1500,
+                                        "minimum": 100
+                                    },
+                                    "methode_paiement": {
+                                        "type": "string",
+                                        "example": "mobile_money_orange",
+                                        "maxLength": 100
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Cree"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/admin/dashboard": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Dashboard",
+                "operationId": "70af94fcf466e0a14cef031a42da5dcd",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/admin/users": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Liste users",
+                "operationId": "6b70842a60ad716244d43555b0d321b6",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/admin/users/{id}": {
+            "patch": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Modifier user",
+                "operationId": "93b91b71362fea32f3db32f4542f6fcc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "statut"
+                                ],
+                                "properties": {
+                                    "statut": {
+                                        "type": "string",
+                                        "example": "suspendu",
+                                        "enum": [
+                                            "actif",
+                                            "suspendu"
+                                        ]
+                                    },
+                                    "motif": {
+                                        "type": "string",
+                                        "example": "Suspicion de fraude",
+                                        "nullable": true,
+                                        "maxLength": 255
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/admin/alerts": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Alertes",
+                "operationId": "b6bdcb7aad99d5a3d0985d7b6a03d83f",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/admin/tasks/upload": {
+            "post": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Upload tasks",
+                "operationId": "6a4dec6f98c340d3f23faa59b6b1948c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "images",
+                                    "type_tache",
+                                    "question"
+                                ],
+                                "properties": {
+                                    "images": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    },
+                                    "type_tache": {
+                                        "type": "string",
+                                        "example": "classification_image",
+                                        "maxLength": 100
+                                    },
+                                    "question": {
+                                        "type": "string",
+                                        "example": "Que montre cette image ?"
+                                    },
+                                    "options": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "example": [
+                                            "chat",
+                                            "chien",
+                                            "voiture"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Cree"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/admin/datasets": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Datasets",
+                "operationId": "e84bb1caa3a822b4db590a8fdefb011a",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/admin/datasets/{id}/export": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Export dataset",
+                "operationId": "1c67a8eb4977a57f126d42b31f2183f3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/admin/config": {
+            "patch": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Config systeme",
+                "operationId": "a4c8c51a5e60da8d17bbb67afd45b5f8",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "seuil_consensus": {
+                                        "type": "number",
+                                        "example": 66,
+                                        "maximum": 100,
+                                        "minimum": 0
+                                    },
+                                    "freq_sentinelle": {
+                                        "type": "integer",
+                                        "example": 10,
+                                        "minimum": 0
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/sync/push": {
+            "post": {
+                "tags": [
+                    "Sync"
+                ],
+                "summary": "Sync push",
+                "operationId": "74a710921972ded1d9731571a7034f8d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/sync/pull": {
+            "get": {
+                "tags": [
+                    "Sync"
+                ],
+                "summary": "Sync pull",
+                "operationId": "98994d6e02185048ec054197cdc52aca",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "description": "Token Sanctum: Bearer {token}",
+                "bearerFormat": "Token",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Auth"
+        },
+        {
+            "name": "Tasks",
+            "description": "Tasks"
+        },
+        {
+            "name": "Wallet",
+            "description": "Wallet"
+        },
+        {
+            "name": "Admin",
+            "description": "Admin"
+        },
+        {
+            "name": "Sync",
+            "description": "Sync"
+        }
+    ]
+}
