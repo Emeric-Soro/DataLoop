@@ -60,7 +60,71 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Inscription reussie"
+                        "description": "Inscription reussie",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Inscription reussie."
+                                        },
+                                        "token_type": {
+                                            "type": "string",
+                                            "example": "Bearer"
+                                        },
+                                        "access_token": {
+                                            "type": "string",
+                                            "example": "1|abc123token"
+                                        },
+                                        "user": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Kouadio Yao"
+                                                },
+                                                "telephone": {
+                                                    "type": "string",
+                                                    "example": "+2250700000000"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "user@example.com",
+                                                    "nullable": true
+                                                },
+                                                "role": {
+                                                    "type": "string",
+                                                    "example": "contributeur"
+                                                },
+                                                "statut": {
+                                                    "type": "string",
+                                                    "example": "actif"
+                                                },
+                                                "score_confiance": {
+                                                    "type": "number",
+                                                    "example": 0
+                                                },
+                                                "solde_virtuel": {
+                                                    "type": "number",
+                                                    "example": 0
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2026-04-22T09:30:00.000000Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -102,7 +166,71 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Connexion reussie"
+                        "description": "Connexion reussie",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Connexion reussie."
+                                        },
+                                        "token_type": {
+                                            "type": "string",
+                                            "example": "Bearer"
+                                        },
+                                        "access_token": {
+                                            "type": "string",
+                                            "example": "1|abc123token"
+                                        },
+                                        "user": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Kouadio Yao"
+                                                },
+                                                "telephone": {
+                                                    "type": "string",
+                                                    "example": "+2250700000000"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "user@example.com",
+                                                    "nullable": true
+                                                },
+                                                "role": {
+                                                    "type": "string",
+                                                    "example": "contributeur"
+                                                },
+                                                "statut": {
+                                                    "type": "string",
+                                                    "example": "actif"
+                                                },
+                                                "score_confiance": {
+                                                    "type": "number",
+                                                    "example": 0
+                                                },
+                                                "solde_virtuel": {
+                                                    "type": "number",
+                                                    "example": 0
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2026-04-22T09:30:00.000000Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -126,7 +254,29 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "OTP envoye"
+                        "description": "OTP envoye",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "OTP genere et logge pour le mode hackathon."
+                                        },
+                                        "otp_debug": {
+                                            "type": "string",
+                                            "example": "123456",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "message": "OTP genere et logge pour le mode hackathon.",
+                                    "otp_debug": "123456"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -150,7 +300,90 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "OTP verifie"
+                        "description": "OTP verifie",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "OTP verifie avec succes."
+                                        },
+                                        "token_type": {
+                                            "type": "string",
+                                            "example": "Bearer",
+                                            "nullable": true
+                                        },
+                                        "access_token": {
+                                            "type": "string",
+                                            "example": "1|abc123token",
+                                            "nullable": true
+                                        },
+                                        "user": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Kouadio Yao"
+                                                },
+                                                "telephone": {
+                                                    "type": "string",
+                                                    "example": "+2250700000000"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "user@example.com",
+                                                    "nullable": true
+                                                },
+                                                "role": {
+                                                    "type": "string",
+                                                    "example": "contributeur"
+                                                },
+                                                "statut": {
+                                                    "type": "string",
+                                                    "example": "actif"
+                                                },
+                                                "score_confiance": {
+                                                    "type": "number",
+                                                    "example": 0
+                                                },
+                                                "solde_virtuel": {
+                                                    "type": "number",
+                                                    "example": 0
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2026-04-22T09:30:00.000000Z"
+                                                }
+                                            },
+                                            "type": "object",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "message": "OTP verifie avec succes.",
+                                    "token_type": "Bearer",
+                                    "access_token": "1|abc123token",
+                                    "user": {
+                                        "id": 1,
+                                        "name": "Kouadio Yao",
+                                        "telephone": "+2250700000000",
+                                        "email": "user@example.com",
+                                        "role": "contributeur",
+                                        "statut": "actif",
+                                        "score_confiance": 0,
+                                        "solde_virtuel": 0,
+                                        "created_at": "2026-04-22T09:30:00.000000Z"
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -164,7 +397,20 @@
                 "operationId": "f429f77c76ed94c688e77779a9621005",
                 "responses": {
                     "200": {
-                        "description": "Deconnecte"
+                        "description": "Deconnecte",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Deconnexion reussie."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -183,7 +429,72 @@
                 "operationId": "21900d7507dd7fa34d2eca27483f1c17",
                 "responses": {
                     "200": {
-                        "description": "Profil"
+                        "description": "Profil",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Kouadio Yao"
+                                                },
+                                                "telephone": {
+                                                    "type": "string",
+                                                    "example": "+2250700000000"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "user@example.com",
+                                                    "nullable": true
+                                                },
+                                                "role": {
+                                                    "type": "string",
+                                                    "example": "contributeur"
+                                                },
+                                                "statut": {
+                                                    "type": "string",
+                                                    "example": "actif"
+                                                },
+                                                "score_confiance": {
+                                                    "type": "number",
+                                                    "example": 0
+                                                },
+                                                "solde_virtuel": {
+                                                    "type": "number",
+                                                    "example": 0
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2026-04-22T09:30:00.000000Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "user": {
+                                        "id": 1,
+                                        "name": "Kouadio Yao",
+                                        "telephone": "+2250700000000",
+                                        "email": "user@example.com",
+                                        "role": "contributeur",
+                                        "statut": "actif",
+                                        "score_confiance": 0,
+                                        "solde_virtuel": 0,
+                                        "created_at": "2026-04-22T09:30:00.000000Z"
+                                    }
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -212,7 +523,73 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Tache recuperee avec succes."
+                                        },
+                                        "task": {
+                                            "type": "object",
+                                            "example": {
+                                                "id": 12,
+                                                "type_tache": "classification_image",
+                                                "question": "Que montre cette image ?",
+                                                "options_reponse": [
+                                                    "chat",
+                                                    "chien",
+                                                    "voiture"
+                                                ],
+                                                "nb_annotations_requises": 3,
+                                                "statut": "nouvelle",
+                                                "is_sentinelle": false,
+                                                "image": {
+                                                    "id": 42,
+                                                    "url_stockage": "images/task-42.jpg",
+                                                    "url": "http://localhost/storage/images/task-42.jpg",
+                                                    "categorie": "animaux"
+                                                },
+                                                "annotations_count": 1,
+                                                "created_at": "2026-04-22T09:30:00.000000Z"
+                                            },
+                                            "nullable": true
+                                        },
+                                        "tasks": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "example": {
+                                                    "id": 12,
+                                                    "type_tache": "classification_image",
+                                                    "question": "Que montre cette image ?",
+                                                    "options_reponse": [
+                                                        "chat",
+                                                        "chien",
+                                                        "voiture"
+                                                    ],
+                                                    "nb_annotations_requises": 3,
+                                                    "statut": "nouvelle",
+                                                    "is_sentinelle": false,
+                                                    "image": {
+                                                        "id": 42,
+                                                        "url_stockage": "images/task-42.jpg",
+                                                        "url": "http://localhost/storage/images/task-42.jpg",
+                                                        "categorie": "animaux"
+                                                    },
+                                                    "annotations_count": 1,
+                                                    "created_at": "2026-04-22T09:30:00.000000Z"
+                                                }
+                                            },
+                                            "nullable": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -463,7 +840,65 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Cree"
+                        "description": "Cree",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Annotation enregistree."
+                                        },
+                                        "consensus_reached": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "annotation": {
+                                            "type": "object",
+                                            "example": {
+                                                "id": 98,
+                                                "tache_id": 12,
+                                                "utilisateur_id": 5,
+                                                "reponse_choisie": "chat",
+                                                "temps_execution_ms": 1850,
+                                                "transaction": {
+                                                    "id": 501,
+                                                    "type": "gain",
+                                                    "libelle": "Recompense annotation",
+                                                    "montant": 250,
+                                                    "solde_avant": 1250,
+                                                    "solde_apres": 1500,
+                                                    "reference_tache": "task:12"
+                                                },
+                                                "tache": {
+                                                    "id": 12,
+                                                    "type_tache": "classification_image",
+                                                    "question": "Que montre cette image ?",
+                                                    "options_reponse": [
+                                                        "chat",
+                                                        "chien",
+                                                        "voiture"
+                                                    ],
+                                                    "nb_annotations_requises": 3,
+                                                    "statut": "en_cours",
+                                                    "is_sentinelle": false,
+                                                    "image": {
+                                                        "id": 42,
+                                                        "url_stockage": "images/task-42.jpg",
+                                                        "url": "http://localhost/storage/images/task-42.jpg",
+                                                        "categorie": "animaux"
+                                                    },
+                                                    "annotations_count": 2,
+                                                    "created_at": "2026-04-22T09:30:00.000000Z"
+                                                },
+                                                "created_at": "2026-04-23T10:00:00.000000Z"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -492,7 +927,20 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Tache ignoree."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -511,7 +959,28 @@
                 "operationId": "d1653bbf267d6e1707113b3f3cc64cf5",
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        },
+                                        "links": {
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -540,7 +1009,44 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "task": {
+                                            "type": "object",
+                                            "example": {
+                                                "id": 12,
+                                                "type_tache": "classification_image",
+                                                "question": "Que montre cette image ?",
+                                                "options_reponse": [
+                                                    "chat",
+                                                    "chien",
+                                                    "voiture"
+                                                ],
+                                                "nb_annotations_requises": 3,
+                                                "statut": "nouvelle",
+                                                "is_sentinelle": false,
+                                                "image": {
+                                                    "id": 42,
+                                                    "url_stockage": "images/task-42.jpg",
+                                                    "url": "http://localhost/storage/images/task-42.jpg",
+                                                    "categorie": "animaux"
+                                                },
+                                                "annotations_count": 1,
+                                                "created_at": "2026-04-22T09:30:00.000000Z"
+                                            }
+                                        },
+                                        "already_annotated": {
+                                            "type": "boolean",
+                                            "example": false
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -559,7 +1065,20 @@
                 "operationId": "aa32a2860c424dd35e4737f465447d3c",
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "solde_virtuel": {
+                                            "type": "number",
+                                            "example": 1500
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -578,7 +1097,55 @@
                 "operationId": "787d7d91f1309459213ecad79340cfe1",
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "example": {
+                                                    "id": 501,
+                                                    "utilisateur_id": 5,
+                                                    "annotation_id": 98,
+                                                    "type": "gain",
+                                                    "libelle": "Recompense annotation",
+                                                    "montant": 250,
+                                                    "solde_avant": 1250,
+                                                    "solde_apres": 1500,
+                                                    "reference_tache": "task:12",
+                                                    "created_at": "2026-04-23T10:00:00.000000Z"
+                                                }
+                                            }
+                                        },
+                                        "links": {
+                                            "type": "object",
+                                            "example": {
+                                                "first": "http://localhost:8000/api/v1/wallet/transactions?page=1",
+                                                "last": "http://localhost:8000/api/v1/wallet/transactions?page=2",
+                                                "prev": null,
+                                                "next": "http://localhost:8000/api/v1/wallet/transactions?page=2"
+                                            }
+                                        },
+                                        "meta": {
+                                            "type": "object",
+                                            "example": {
+                                                "current_page": 1,
+                                                "from": 1,
+                                                "last_page": 2,
+                                                "path": "http://localhost:8000/api/v1/wallet/transactions",
+                                                "per_page": 20,
+                                                "to": 20,
+                                                "total": 30
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -623,7 +1190,27 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Cree"
+                        "description": "Cree",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Demande de retrait enregistree."
+                                        },
+                                        "solde_virtuel": {
+                                            "type": "number",
+                                            "example": 500
+                                        },
+                                        "transaction": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -642,7 +1229,28 @@
                 "operationId": "70af94fcf466e0a14cef031a42da5dcd",
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Metriques dashboard admin recuperees."
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": {
+                                                "annotations_aujourdhui": 12,
+                                                "utilisateurs_inscrits": 256,
+                                                "solde_total_distribue": 125000
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -661,7 +1269,54 @@
                 "operationId": "6b70842a60ad716244d43555b0d321b6",
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "example": {
+                                                    "id": 5,
+                                                    "name": "Awa Traore",
+                                                    "telephone": "+2250700000001",
+                                                    "email": "awa@example.com",
+                                                    "role": "contributeur",
+                                                    "statut": "actif",
+                                                    "score_confiance": 87.5,
+                                                    "solde_virtuel": 1500,
+                                                    "created_at": "2026-04-20T08:15:00.000000Z"
+                                                }
+                                            }
+                                        },
+                                        "links": {
+                                            "type": "object",
+                                            "example": {
+                                                "first": "http://localhost:8000/api/v1/admin/users?page=1",
+                                                "last": "http://localhost:8000/api/v1/admin/users?page=3",
+                                                "prev": null,
+                                                "next": "http://localhost:8000/api/v1/admin/users?page=2"
+                                            }
+                                        },
+                                        "meta": {
+                                            "type": "object",
+                                            "example": {
+                                                "current_page": 1,
+                                                "from": 1,
+                                                "last_page": 3,
+                                                "path": "http://localhost:8000/api/v1/admin/users",
+                                                "per_page": 20,
+                                                "to": 20,
+                                                "total": 54
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -719,7 +1374,23 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Statut utilisateur mis a jour."
+                                        },
+                                        "user": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -738,7 +1409,38 @@
                 "operationId": "b6bdcb7aad99d5a3d0985d7b6a03d83f",
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "alerts": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "example": {
+                                                    "id": 18,
+                                                    "severity": "high",
+                                                    "reason": "Temps d'execution suspectement faible.",
+                                                    "temps_execution_ms": 420,
+                                                    "created_at": "2026-04-23T09:45:00.000000Z",
+                                                    "utilisateur": {
+                                                        "id": 5,
+                                                        "name": "Awa Traore",
+                                                        "telephone": "+2250700000001"
+                                                    },
+                                                    "tache": {
+                                                        "id": 12,
+                                                        "question": "Que montre cette image ?"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -801,7 +1503,30 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Cree"
+                        "description": "Cree",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Upload traite et taches creees."
+                                        },
+                                        "count": {
+                                            "type": "integer",
+                                            "example": 3
+                                        },
+                                        "tasks": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -820,7 +1545,53 @@
                 "operationId": "e84bb1caa3a822b4db590a8fdefb011a",
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "example": {
+                                                    "id": 4,
+                                                    "nom": "Dataset initial",
+                                                    "description": "Jeu de donnees de validation",
+                                                    "version": "1.0",
+                                                    "nb_images": 120,
+                                                    "nb_annotations_validees": 300,
+                                                    "format_export": "json",
+                                                    "created_at": "2026-04-21T12:00:00.000000Z"
+                                                }
+                                            }
+                                        },
+                                        "links": {
+                                            "type": "object",
+                                            "example": {
+                                                "first": "http://localhost:8000/api/v1/admin/datasets?page=1",
+                                                "last": "http://localhost:8000/api/v1/admin/datasets?page=2",
+                                                "prev": null,
+                                                "next": "http://localhost:8000/api/v1/admin/datasets?page=2"
+                                            }
+                                        },
+                                        "meta": {
+                                            "type": "object",
+                                            "example": {
+                                                "current_page": 1,
+                                                "from": 1,
+                                                "last_page": 2,
+                                                "path": "http://localhost:8000/api/v1/admin/datasets",
+                                                "per_page": 20,
+                                                "to": 20,
+                                                "total": 24
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -849,7 +1620,43 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "dataset": {
+                                            "type": "object",
+                                            "example": {
+                                                "id": 4,
+                                                "nom": "Dataset initial",
+                                                "description": "Jeu de donnees de validation",
+                                                "version": "1.0",
+                                                "nb_images": 120,
+                                                "nb_annotations_validees": 300,
+                                                "format_export": "json",
+                                                "created_at": "2026-04-21T12:00:00.000000Z"
+                                            }
+                                        },
+                                        "annotations": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "example": {
+                                                    "id": 98,
+                                                    "tache_id": 12,
+                                                    "utilisateur_id": 5,
+                                                    "reponse_choisie": "chat",
+                                                    "temps_execution_ms": 1850,
+                                                    "created_at": "2026-04-23T10:00:00.000000Z"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -891,7 +1698,27 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Configuration systeme mise a jour."
+                                        },
+                                        "config": {
+                                            "type": "object",
+                                            "example": {
+                                                "seuil_consensus": 66,
+                                                "freq_sentinelle": 10
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -920,7 +1747,28 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Synchronisation push terminee."
+                                        },
+                                        "created": {
+                                            "type": "integer",
+                                            "example": 12
+                                        },
+                                        "ignored": {
+                                            "type": "integer",
+                                            "example": 2
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -939,7 +1787,66 @@
                 "operationId": "98994d6e02185048ec054197cdc52aca",
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "server_timestamp": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2026-04-23T10:00:00Z"
+                                        },
+                                        "tasks": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "example": {
+                                                    "id": 12,
+                                                    "type_tache": "classification_image",
+                                                    "question": "Que montre cette image ?",
+                                                    "options_reponse": [
+                                                        "chat",
+                                                        "chien",
+                                                        "voiture"
+                                                    ],
+                                                    "nb_annotations_requises": 3,
+                                                    "statut": "en_cours",
+                                                    "is_sentinelle": false,
+                                                    "image": {
+                                                        "id": 42,
+                                                        "url_stockage": "images/task-42.jpg",
+                                                        "url": "http://localhost/storage/images/task-42.jpg",
+                                                        "categorie": "animaux"
+                                                    },
+                                                    "annotations_count": 2,
+                                                    "created_at": "2026-04-22T09:30:00.000000Z"
+                                                }
+                                            }
+                                        },
+                                        "transactions": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "example": {
+                                                    "id": 501,
+                                                    "utilisateur_id": 5,
+                                                    "annotation_id": 98,
+                                                    "type": "gain",
+                                                    "libelle": "Recompense annotation",
+                                                    "montant": 250,
+                                                    "solde_avant": 1250,
+                                                    "solde_apres": 1500,
+                                                    "reference_tache": "task:12",
+                                                    "created_at": "2026-04-23T10:00:00.000000Z"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
