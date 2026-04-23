@@ -9,7 +9,9 @@ RUN apt-get update \
     libonig-dev \
     libxml2-dev \
     && docker-php-ext-install pdo pdo_mysql bcmath intl zip mbstring xml \
-    && (a2dismod mpm_event mpm_worker || true) \
+    && (a2dismod mpm_event || true) \
+    && (a2dismod mpm_worker || true) \
+    && rm -f /etc/apache2/mods-enabled/mpm_event.* /etc/apache2/mods-enabled/mpm_worker.* \
     && a2enmod mpm_prefork rewrite \
     && rm -rf /var/lib/apt/lists/*
 
