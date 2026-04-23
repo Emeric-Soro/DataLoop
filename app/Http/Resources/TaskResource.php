@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Str;
 
 class TaskResource extends JsonResource
 {
@@ -20,6 +21,13 @@ class TaskResource extends JsonResource
             'image' => [
                 'id' => $this->image?->id,
                 'url_stockage' => $this->image?->url_stockage,
+                'url' => $this->image?->url_stockage
+                    ? (
+                        Str::startsWith($this->image->url_stockage, ['http://', 'https://'])
+                            ? $this->image->url_stockage
+                            : url('/storage/' . ltrim($this->image->url_stockage, '/'))
+                    )
+                    : null,
                 'categorie' => $this->image?->categorie,
             ],
             'annotations_count' => $this->whenCounted('annotations'),

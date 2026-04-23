@@ -19,8 +19,8 @@ class RegisterRequest extends FormRequest
             'nom' => ['nullable', 'string', 'max:255'],
             'telephone' => ['required', 'string', 'max:20', 'unique:users,telephone'],
             'email' => ['nullable', 'email', 'max:255', 'unique:users,email'],
-            'password' => ['required', 'string', Password::min(8)],
-            'mot_de_passe' => ['nullable', 'string', Password::min(8)],
+            'password' => ['nullable', 'string', 'required_without:mot_de_passe', Password::min(6)],
+            'mot_de_passe' => ['nullable', 'string', 'required_without:password', Password::min(6)],
         ];
     }
 }

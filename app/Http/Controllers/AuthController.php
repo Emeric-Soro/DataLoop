@@ -88,6 +88,9 @@ class AuthController extends Controller
 
         return response()->json([
             'message' => 'OTP genere et logge pour le mode hackathon.',
+            'otp_debug' => app()->environment(['local', 'testing']) || config('app.debug')
+                ? (string) $code
+                : null,
         ]);
     }
 
