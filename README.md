@@ -33,12 +33,6 @@ composer install
 cp .env.example .env
 ```
 
-Alternative locale Laragon:
-
-```bash
-cp .env.local .env
-```
-
 3. Configurer la base locale dans `.env`:
 
 ```env
@@ -111,6 +105,8 @@ FILESYSTEM_DISK=local
 Notes:
 
 - Les valeurs `MYSQL*` sont fournies automatiquement par Railway sur le service MySQL.
+- Le backend sait maintenant lire directement `MYSQLHOST`, `MYSQLPORT`, `MYSQLDATABASE`, `MYSQLUSER`, `MYSQLPASSWORD` et `MYSQL_URL`, meme si tu ne recopies pas ces valeurs dans des variables `DB_*`.
+- Eviter de versionner un vrai fichier `.env` ou d'importer tel quel un `.env` local dans Railway.
 - Renseigner `APP_KEY` (genere localement avec `php artisan key:generate --show`).
 
 ### 3. Build et demarrage
