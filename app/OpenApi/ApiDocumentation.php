@@ -42,7 +42,6 @@ class ApiDocumentation
                     properties: [
                         new OA\Property(property: 'message', type: 'string', example: 'Inscription reussie.'),
                         new OA\Property(property: 'token_type', type: 'string', example: 'Bearer'),
-                        new OA\Property(property: 'access_token', type: 'string', example: '1|abc123token'),
                         new OA\Property(
                             property: 'user',
                             type: 'object',
@@ -55,6 +54,7 @@ class ApiDocumentation
                                 new OA\Property(property: 'statut', type: 'string', example: 'actif'),
                                 new OA\Property(property: 'score_confiance', type: 'number', example: 0),
                                 new OA\Property(property: 'solde_virtuel', type: 'number', example: 0),
+                                new OA\Property(property: 'access_token', type: 'string', example: '1|abc123token'),
                                 new OA\Property(property: 'created_at', type: 'string', format: 'date-time', example: '2026-04-22T09:30:00.000000Z'),
                             ]
                         ),
@@ -92,7 +92,6 @@ class ApiDocumentation
                     properties: [
                         new OA\Property(property: 'message', type: 'string', example: 'Connexion reussie.'),
                         new OA\Property(property: 'token_type', type: 'string', example: 'Bearer'),
-                        new OA\Property(property: 'access_token', type: 'string', example: '1|abc123token'),
                         new OA\Property(
                             property: 'user',
                             type: 'object',
@@ -105,6 +104,7 @@ class ApiDocumentation
                                 new OA\Property(property: 'statut', type: 'string', example: 'actif'),
                                 new OA\Property(property: 'score_confiance', type: 'number', example: 0),
                                 new OA\Property(property: 'solde_virtuel', type: 'number', example: 0),
+                                new OA\Property(property: 'access_token', type: 'string', example: '1|abc123token'),
                                 new OA\Property(property: 'created_at', type: 'string', format: 'date-time', example: '2026-04-22T09:30:00.000000Z'),
                             ]
                         ),
@@ -158,7 +158,6 @@ class ApiDocumentation
                     properties: [
                         new OA\Property(property: 'message', type: 'string', example: 'OTP verifie avec succes.'),
                         new OA\Property(property: 'token_type', type: 'string', nullable: true, example: 'Bearer'),
-                        new OA\Property(property: 'access_token', type: 'string', nullable: true, example: '1|abc123token'),
                         new OA\Property(
                             property: 'user',
                             type: 'object',
@@ -172,6 +171,7 @@ class ApiDocumentation
                                 new OA\Property(property: 'statut', type: 'string', example: 'actif'),
                                 new OA\Property(property: 'score_confiance', type: 'number', example: 0),
                                 new OA\Property(property: 'solde_virtuel', type: 'number', example: 0),
+                                new OA\Property(property: 'access_token', type: 'string', nullable: true, example: '1|abc123token'),
                                 new OA\Property(property: 'created_at', type: 'string', format: 'date-time', example: '2026-04-22T09:30:00.000000Z'),
                             ]
                         ),
@@ -179,7 +179,6 @@ class ApiDocumentation
                     example: [
                         'message' => 'OTP verifie avec succes.',
                         'token_type' => 'Bearer',
-                        'access_token' => '1|abc123token',
                         'user' => [
                             'id' => 1,
                             'name' => 'Kouadio Yao',
@@ -189,6 +188,7 @@ class ApiDocumentation
                             'statut' => 'actif',
                             'score_confiance' => 0,
                             'solde_virtuel' => 0,
+                            'access_token' => '1|abc123token',
                             'created_at' => '2026-04-22T09:30:00.000000Z',
                         ],
                     ]

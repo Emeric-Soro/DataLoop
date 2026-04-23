@@ -73,10 +73,6 @@
                                             "type": "string",
                                             "example": "Bearer"
                                         },
-                                        "access_token": {
-                                            "type": "string",
-                                            "example": "1|abc123token"
-                                        },
                                         "user": {
                                             "properties": {
                                                 "id": {
@@ -111,6 +107,10 @@
                                                 "solde_virtuel": {
                                                     "type": "number",
                                                     "example": 0
+                                                },
+                                                "access_token": {
+                                                    "type": "string",
+                                                    "example": "1|abc123token"
                                                 },
                                                 "created_at": {
                                                     "type": "string",
@@ -179,10 +179,6 @@
                                             "type": "string",
                                             "example": "Bearer"
                                         },
-                                        "access_token": {
-                                            "type": "string",
-                                            "example": "1|abc123token"
-                                        },
                                         "user": {
                                             "properties": {
                                                 "id": {
@@ -217,6 +213,10 @@
                                                 "solde_virtuel": {
                                                     "type": "number",
                                                     "example": 0
+                                                },
+                                                "access_token": {
+                                                    "type": "string",
+                                                    "example": "1|abc123token"
                                                 },
                                                 "created_at": {
                                                     "type": "string",
@@ -314,11 +314,6 @@
                                             "example": "Bearer",
                                             "nullable": true
                                         },
-                                        "access_token": {
-                                            "type": "string",
-                                            "example": "1|abc123token",
-                                            "nullable": true
-                                        },
                                         "user": {
                                             "properties": {
                                                 "id": {
@@ -354,6 +349,11 @@
                                                     "type": "number",
                                                     "example": 0
                                                 },
+                                                "access_token": {
+                                                    "type": "string",
+                                                    "example": "1|abc123token",
+                                                    "nullable": true
+                                                },
                                                 "created_at": {
                                                     "type": "string",
                                                     "format": "date-time",
@@ -369,7 +369,6 @@
                                 "example": {
                                     "message": "OTP verifie avec succes.",
                                     "token_type": "Bearer",
-                                    "access_token": "1|abc123token",
                                     "user": {
                                         "id": 1,
                                         "name": "Kouadio Yao",
@@ -379,6 +378,7 @@
                                         "statut": "actif",
                                         "score_confiance": 0,
                                         "solde_virtuel": 0,
+                                        "access_token": "1|abc123token",
                                         "created_at": "2026-04-22T09:30:00.000000Z"
                                     }
                                 }
