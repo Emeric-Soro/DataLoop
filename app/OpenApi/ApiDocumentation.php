@@ -117,12 +117,85 @@ class ApiDocumentation
     {
     }
 
-    #[OA\Post(path: '/api/v1/auth/otp/send', tags: ['Auth'], summary: 'Envoyer OTP', requestBody: new OA\RequestBody(required: true, content: new OA\JsonContent(type: 'object')), responses: [new OA\Response(response: 200, description: 'OTP envoye', content: new OA\JsonContent(type: 'object', properties: [new OA\Property(property: 'message', type: 'string', example: 'OTP genere et logge pour le mode hackathon.'), new OA\Property(property: 'otp_debug', type: 'string', nullable: true, example: '123456')]))])]
+    #[OA\Post(
+        path: '/api/v1/auth/otp/send',
+        tags: ['Auth'],
+        summary: 'Envoyer OTP',
+        requestBody: new OA\RequestBody(required: true, content: new OA\JsonContent(type: 'object')),
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'OTP envoye',
+                content: new OA\JsonContent(
+                    type: 'object',
+                    properties: [
+                        new OA\Property(property: 'message', type: 'string', example: 'OTP genere et logge pour le mode hackathon.'),
+                        new OA\Property(property: 'otp_debug', type: 'string', nullable: true, example: '123456'),
+                    ],
+                    example: [
+                        'message' => 'OTP genere et logge pour le mode hackathon.',
+                        'otp_debug' => '123456',
+                    ]
+                )
+            ),
+        ]
+    )]
     public function authOtpSend(): void
     {
     }
 
-    #[OA\Post(path: '/api/v1/auth/otp/verify', tags: ['Auth'], summary: 'Verifier OTP', requestBody: new OA\RequestBody(required: true, content: new OA\JsonContent(type: 'object')), responses: [new OA\Response(response: 200, description: 'OTP verifie', content: new OA\JsonContent(type: 'object', properties: [new OA\Property(property: 'message', type: 'string', example: 'OTP verifie avec succes.'), new OA\Property(property: 'token_type', type: 'string', nullable: true, example: 'Bearer'), new OA\Property(property: 'access_token', type: 'string', nullable: true, example: '1|abc123token'), new OA\Property(property: 'user', type: 'object', nullable: true)]))])]
+    #[OA\Post(
+        path: '/api/v1/auth/otp/verify',
+        tags: ['Auth'],
+        summary: 'Verifier OTP',
+        requestBody: new OA\RequestBody(required: true, content: new OA\JsonContent(type: 'object')),
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'OTP verifie',
+                content: new OA\JsonContent(
+                    type: 'object',
+                    properties: [
+                        new OA\Property(property: 'message', type: 'string', example: 'OTP verifie avec succes.'),
+                        new OA\Property(property: 'token_type', type: 'string', nullable: true, example: 'Bearer'),
+                        new OA\Property(property: 'access_token', type: 'string', nullable: true, example: '1|abc123token'),
+                        new OA\Property(
+                            property: 'user',
+                            type: 'object',
+                            nullable: true,
+                            properties: [
+                                new OA\Property(property: 'id', type: 'integer', example: 1),
+                                new OA\Property(property: 'name', type: 'string', example: 'Kouadio Yao'),
+                                new OA\Property(property: 'telephone', type: 'string', example: '+2250700000000'),
+                                new OA\Property(property: 'email', type: 'string', nullable: true, example: 'user@example.com'),
+                                new OA\Property(property: 'role', type: 'string', example: 'contributeur'),
+                                new OA\Property(property: 'statut', type: 'string', example: 'actif'),
+                                new OA\Property(property: 'score_confiance', type: 'number', example: 0),
+                                new OA\Property(property: 'solde_virtuel', type: 'number', example: 0),
+                                new OA\Property(property: 'created_at', type: 'string', format: 'date-time', example: '2026-04-22T09:30:00.000000Z'),
+                            ]
+                        ),
+                    ],
+                    example: [
+                        'message' => 'OTP verifie avec succes.',
+                        'token_type' => 'Bearer',
+                        'access_token' => '1|abc123token',
+                        'user' => [
+                            'id' => 1,
+                            'name' => 'Kouadio Yao',
+                            'telephone' => '+2250700000000',
+                            'email' => 'user@example.com',
+                            'role' => 'contributeur',
+                            'statut' => 'actif',
+                            'score_confiance' => 0,
+                            'solde_virtuel' => 0,
+                            'created_at' => '2026-04-22T09:30:00.000000Z',
+                        ],
+                    ]
+                )
+            ),
+        ]
+    )]
     public function authOtpVerify(): void
     {
     }
@@ -137,13 +210,78 @@ class ApiDocumentation
         tags: ['Auth'],
         summary: 'Profil connecte',
         security: [['bearerAuth' => []]],
-        responses: [new OA\Response(response: 200, description: 'Profil', content: new OA\JsonContent(type: 'object', properties: [new OA\Property(property: 'user', type: 'object', properties: [new OA\Property(property: 'id', type: 'integer', example: 1), new OA\Property(property: 'name', type: 'string', example: 'Kouadio Yao'), new OA\Property(property: 'telephone', type: 'string', example: '+2250700000000'), new OA\Property(property: 'email', type: 'string', nullable: true, example: 'user@example.com'), new OA\Property(property: 'role', type: 'string', example: 'contributeur'), new OA\Property(property: 'statut', type: 'string', example: 'actif'), new OA\Property(property: 'score_confiance', type: 'number', example: 0), new OA\Property(property: 'solde_virtuel', type: 'number', example: 0), new OA\Property(property: 'created_at', type: 'string', format: 'date-time', example: '2026-04-22T09:30:00.000000Z')])]))])
+        responses: [new OA\Response(response: 200, description: 'Profil', content: new OA\JsonContent(type: 'object', properties: [new OA\Property(property: 'user', type: 'object', properties: [new OA\Property(property: 'id', type: 'integer', example: 1), new OA\Property(property: 'name', type: 'string', example: 'Kouadio Yao'), new OA\Property(property: 'telephone', type: 'string', example: '+2250700000000'), new OA\Property(property: 'email', type: 'string', nullable: true, example: 'user@example.com'), new OA\Property(property: 'role', type: 'string', example: 'contributeur'), new OA\Property(property: 'statut', type: 'string', example: 'actif'), new OA\Property(property: 'score_confiance', type: 'number', example: 0), new OA\Property(property: 'solde_virtuel', type: 'number', example: 0), new OA\Property(property: 'created_at', type: 'string', format: 'date-time', example: '2026-04-22T09:30:00.000000Z')])], example: ['user' => ['id' => 1, 'name' => 'Kouadio Yao', 'telephone' => '+2250700000000', 'email' => 'user@example.com', 'role' => 'contributeur', 'statut' => 'actif', 'score_confiance' => 0, 'solde_virtuel' => 0, 'created_at' => '2026-04-22T09:30:00.000000Z']]))])
     ]
     public function authMe(): void
     {
     }
 
-    #[OA\Get(path: '/api/v1/tasks/next', tags: ['Tasks'], summary: 'Prochaine tache', security: [['bearerAuth' => []]], parameters: [new OA\Parameter(name: 'count', in: 'query', required: false, schema: new OA\Schema(type: 'integer'))], responses: [new OA\Response(response: 200, description: 'OK', content: new OA\JsonContent(type: 'object', properties: [new OA\Property(property: 'message', type: 'string', example: 'Tache recuperee avec succes.'), new OA\Property(property: 'task', type: 'object', nullable: true), new OA\Property(property: 'tasks', type: 'array', nullable: true, items: new OA\Items(type: 'object'))]))])]
+    #[OA\Get(
+        path: '/api/v1/tasks/next',
+        tags: ['Tasks'],
+        summary: 'Prochaine tache',
+        security: [['bearerAuth' => []]],
+        parameters: [new OA\Parameter(name: 'count', in: 'query', required: false, schema: new OA\Schema(type: 'integer'))],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'OK',
+                content: new OA\JsonContent(
+                    type: 'object',
+                    properties: [
+                        new OA\Property(property: 'message', type: 'string', example: 'Tache recuperee avec succes.'),
+                        new OA\Property(
+                            property: 'task',
+                            type: 'object',
+                            nullable: true,
+                            example: [
+                                'id' => 12,
+                                'type_tache' => 'classification_image',
+                                'question' => 'Que montre cette image ?',
+                                'options_reponse' => ['chat', 'chien', 'voiture'],
+                                'nb_annotations_requises' => 3,
+                                'statut' => 'nouvelle',
+                                'is_sentinelle' => false,
+                                'image' => [
+                                    'id' => 42,
+                                    'url_stockage' => 'images/task-42.jpg',
+                                    'url' => 'http://localhost/storage/images/task-42.jpg',
+                                    'categorie' => 'animaux',
+                                ],
+                                'annotations_count' => 1,
+                                'created_at' => '2026-04-22T09:30:00.000000Z',
+                            ]
+                        ),
+                        new OA\Property(
+                            property: 'tasks',
+                            type: 'array',
+                            nullable: true,
+                            items: new OA\Items(
+                                type: 'object',
+                                example: [
+                                    'id' => 12,
+                                    'type_tache' => 'classification_image',
+                                    'question' => 'Que montre cette image ?',
+                                    'options_reponse' => ['chat', 'chien', 'voiture'],
+                                    'nb_annotations_requises' => 3,
+                                    'statut' => 'nouvelle',
+                                    'is_sentinelle' => false,
+                                    'image' => [
+                                        'id' => 42,
+                                        'url_stockage' => 'images/task-42.jpg',
+                                        'url' => 'http://localhost/storage/images/task-42.jpg',
+                                        'categorie' => 'animaux',
+                                    ],
+                                    'annotations_count' => 1,
+                                    'created_at' => '2026-04-22T09:30:00.000000Z',
+                                ]
+                            )
+                        ),
+                    ]
+                )
+            )
+        ]
+    )]
     public function tasksNext(): void
     {
     }
@@ -245,7 +383,7 @@ class ApiDocumentation
                 type: 'object'
             )
         ),
-        responses: [new OA\Response(response: 201, description: 'Cree', content: new OA\JsonContent(type: 'object', properties: [new OA\Property(property: 'message', type: 'string', example: 'Annotation enregistree.'), new OA\Property(property: 'consensus_reached', type: 'boolean', example: false), new OA\Property(property: 'annotation', type: 'object')]))]
+        responses: [new OA\Response(response: 201, description: 'Cree', content: new OA\JsonContent(type: 'object', properties: [new OA\Property(property: 'message', type: 'string', example: 'Annotation enregistree.'), new OA\Property(property: 'consensus_reached', type: 'boolean', example: false), new OA\Property(property: 'annotation', type: 'object', example: ['id' => 98, 'tache_id' => 12, 'utilisateur_id' => 5, 'reponse_choisie' => 'chat', 'temps_execution_ms' => 1850, 'transaction' => ['id' => 501, 'type' => 'gain', 'libelle' => 'Recompense annotation', 'montant' => 250, 'solde_avant' => 1250, 'solde_apres' => 1500, 'reference_tache' => 'task:12'], 'tache' => ['id' => 12, 'type_tache' => 'classification_image', 'question' => 'Que montre cette image ?', 'options_reponse' => ['chat', 'chien', 'voiture'], 'nb_annotations_requises' => 3, 'statut' => 'en_cours', 'is_sentinelle' => false, 'image' => ['id' => 42, 'url_stockage' => 'images/task-42.jpg', 'url' => 'http://localhost/storage/images/task-42.jpg', 'categorie' => 'animaux'], 'annotations_count' => 2, 'created_at' => '2026-04-22T09:30:00.000000Z'], 'created_at' => '2026-04-23T10:00:00.000000Z'])]))]
     )]
     public function tasksAnnotate(): void
     {
@@ -261,7 +399,7 @@ class ApiDocumentation
     {
     }
 
-    #[OA\Get(path: '/api/v1/tasks/{id}', tags: ['Tasks'], summary: 'Detail tache', security: [['bearerAuth' => []]], parameters: [new OA\Parameter(name: 'id', in: 'path', required: true, schema: new OA\Schema(type: 'integer'))], responses: [new OA\Response(response: 200, description: 'OK', content: new OA\JsonContent(type: 'object', properties: [new OA\Property(property: 'task', type: 'object'), new OA\Property(property: 'already_annotated', type: 'boolean', example: false)]))])]
+    #[OA\Get(path: '/api/v1/tasks/{id}', tags: ['Tasks'], summary: 'Detail tache', security: [['bearerAuth' => []]], parameters: [new OA\Parameter(name: 'id', in: 'path', required: true, schema: new OA\Schema(type: 'integer'))], responses: [new OA\Response(response: 200, description: 'OK', content: new OA\JsonContent(type: 'object', properties: [new OA\Property(property: 'task', type: 'object', example: ['id' => 12, 'type_tache' => 'classification_image', 'question' => 'Que montre cette image ?', 'options_reponse' => ['chat', 'chien', 'voiture'], 'nb_annotations_requises' => 3, 'statut' => 'nouvelle', 'is_sentinelle' => false, 'image' => ['id' => 42, 'url_stockage' => 'images/task-42.jpg', 'url' => 'http://localhost/storage/images/task-42.jpg', 'categorie' => 'animaux'], 'annotations_count' => 1, 'created_at' => '2026-04-22T09:30:00.000000Z']), new OA\Property(property: 'already_annotated', type: 'boolean', example: false)]))])]
     public function tasksShow(): void
     {
     }
@@ -271,7 +409,7 @@ class ApiDocumentation
     {
     }
 
-    #[OA\Get(path: '/api/v1/wallet/transactions', tags: ['Wallet'], summary: 'Transactions', security: [['bearerAuth' => []]], responses: [new OA\Response(response: 200, description: 'OK', content: new OA\JsonContent(type: 'object', properties: [new OA\Property(property: 'data', type: 'array', items: new OA\Items(type: 'object')), new OA\Property(property: 'links', type: 'object'), new OA\Property(property: 'meta', type: 'object')]))])]
+    #[OA\Get(path: '/api/v1/wallet/transactions', tags: ['Wallet'], summary: 'Transactions', security: [['bearerAuth' => []]], responses: [new OA\Response(response: 200, description: 'OK', content: new OA\JsonContent(type: 'object', properties: [new OA\Property(property: 'data', type: 'array', items: new OA\Items(type: 'object', example: ['id' => 501, 'utilisateur_id' => 5, 'annotation_id' => 98, 'type' => 'gain', 'libelle' => 'Recompense annotation', 'montant' => 250, 'solde_avant' => 1250, 'solde_apres' => 1500, 'reference_tache' => 'task:12', 'created_at' => '2026-04-23T10:00:00.000000Z'])), new OA\Property(property: 'links', type: 'object', example: ['first' => 'http://localhost:8000/api/v1/wallet/transactions?page=1', 'last' => 'http://localhost:8000/api/v1/wallet/transactions?page=2', 'prev' => null, 'next' => 'http://localhost:8000/api/v1/wallet/transactions?page=2']), new OA\Property(property: 'meta', type: 'object', example: ['current_page' => 1, 'from' => 1, 'last_page' => 2, 'path' => 'http://localhost:8000/api/v1/wallet/transactions', 'per_page' => 20, 'to' => 20, 'total' => 30])]))])]
     public function walletTransactions(): void
     {
     }
@@ -298,12 +436,12 @@ class ApiDocumentation
     {
     }
 
-    #[OA\Get(path: '/api/v1/admin/dashboard', tags: ['Admin'], summary: 'Dashboard', security: [['bearerAuth' => []]], responses: [new OA\Response(response: 200, description: 'OK', content: new OA\JsonContent(type: 'object', properties: [new OA\Property(property: 'message', type: 'string', example: 'Metriques dashboard admin recuperees.'), new OA\Property(property: 'data', type: 'object', properties: [new OA\Property(property: 'annotations_aujourdhui', type: 'integer', example: 12), new OA\Property(property: 'utilisateurs_inscrits', type: 'integer', example: 256), new OA\Property(property: 'solde_total_distribue', type: 'number', example: 125000)])]))])]
+    #[OA\Get(path: '/api/v1/admin/dashboard', tags: ['Admin'], summary: 'Dashboard', security: [['bearerAuth' => []]], responses: [new OA\Response(response: 200, description: 'OK', content: new OA\JsonContent(type: 'object', properties: [new OA\Property(property: 'message', type: 'string', example: 'Metriques dashboard admin recuperees.'), new OA\Property(property: 'data', type: 'object', example: ['annotations_aujourdhui' => 12, 'utilisateurs_inscrits' => 256, 'solde_total_distribue' => 125000])]))])]
     public function adminDashboard(): void
     {
     }
 
-    #[OA\Get(path: '/api/v1/admin/users', tags: ['Admin'], summary: 'Liste users', security: [['bearerAuth' => []]], responses: [new OA\Response(response: 200, description: 'OK', content: new OA\JsonContent(type: 'object', properties: [new OA\Property(property: 'data', type: 'array', items: new OA\Items(type: 'object')), new OA\Property(property: 'links', type: 'object'), new OA\Property(property: 'meta', type: 'object')]))])]
+    #[OA\Get(path: '/api/v1/admin/users', tags: ['Admin'], summary: 'Liste users', security: [['bearerAuth' => []]], responses: [new OA\Response(response: 200, description: 'OK', content: new OA\JsonContent(type: 'object', properties: [new OA\Property(property: 'data', type: 'array', items: new OA\Items(type: 'object', example: ['id' => 5, 'name' => 'Awa Traore', 'telephone' => '+2250700000001', 'email' => 'awa@example.com', 'role' => 'contributeur', 'statut' => 'actif', 'score_confiance' => 87.5, 'solde_virtuel' => 1500, 'created_at' => '2026-04-20T08:15:00.000000Z'])), new OA\Property(property: 'links', type: 'object', example: ['first' => 'http://localhost:8000/api/v1/admin/users?page=1', 'last' => 'http://localhost:8000/api/v1/admin/users?page=3', 'prev' => null, 'next' => 'http://localhost:8000/api/v1/admin/users?page=2']), new OA\Property(property: 'meta', type: 'object', example: ['current_page' => 1, 'from' => 1, 'last_page' => 3, 'path' => 'http://localhost:8000/api/v1/admin/users', 'per_page' => 20, 'to' => 20, 'total' => 54])]))])]
     public function adminUsers(): void
     {
     }
@@ -331,7 +469,7 @@ class ApiDocumentation
     {
     }
 
-    #[OA\Get(path: '/api/v1/admin/alerts', tags: ['Admin'], summary: 'Alertes', security: [['bearerAuth' => []]], responses: [new OA\Response(response: 200, description: 'OK', content: new OA\JsonContent(type: 'object', properties: [new OA\Property(property: 'alerts', type: 'array', items: new OA\Items(type: 'object'))]))])]
+    #[OA\Get(path: '/api/v1/admin/alerts', tags: ['Admin'], summary: 'Alertes', security: [['bearerAuth' => []]], responses: [new OA\Response(response: 200, description: 'OK', content: new OA\JsonContent(type: 'object', properties: [new OA\Property(property: 'alerts', type: 'array', items: new OA\Items(type: 'object', example: ['id' => 18, 'severity' => 'high', 'reason' => 'Temps d\'execution suspectement faible.', 'temps_execution_ms' => 420, 'created_at' => '2026-04-23T09:45:00.000000Z', 'utilisateur' => ['id' => 5, 'name' => 'Awa Traore', 'telephone' => '+2250700000001'], 'tache' => ['id' => 12, 'question' => 'Que montre cette image ?']]))]))])]
     public function adminAlerts(): void
     {
     }
@@ -372,12 +510,12 @@ class ApiDocumentation
     {
     }
 
-    #[OA\Get(path: '/api/v1/admin/datasets', tags: ['Admin'], summary: 'Datasets', security: [['bearerAuth' => []]], responses: [new OA\Response(response: 200, description: 'OK', content: new OA\JsonContent(type: 'object', properties: [new OA\Property(property: 'data', type: 'array', items: new OA\Items(type: 'object')), new OA\Property(property: 'links', type: 'object'), new OA\Property(property: 'meta', type: 'object')]))])]
+    #[OA\Get(path: '/api/v1/admin/datasets', tags: ['Admin'], summary: 'Datasets', security: [['bearerAuth' => []]], responses: [new OA\Response(response: 200, description: 'OK', content: new OA\JsonContent(type: 'object', properties: [new OA\Property(property: 'data', type: 'array', items: new OA\Items(type: 'object', example: ['id' => 4, 'nom' => 'Dataset initial', 'description' => 'Jeu de donnees de validation', 'version' => '1.0', 'nb_images' => 120, 'nb_annotations_validees' => 300, 'format_export' => 'json', 'created_at' => '2026-04-21T12:00:00.000000Z'])), new OA\Property(property: 'links', type: 'object', example: ['first' => 'http://localhost:8000/api/v1/admin/datasets?page=1', 'last' => 'http://localhost:8000/api/v1/admin/datasets?page=2', 'prev' => null, 'next' => 'http://localhost:8000/api/v1/admin/datasets?page=2']), new OA\Property(property: 'meta', type: 'object', example: ['current_page' => 1, 'from' => 1, 'last_page' => 2, 'path' => 'http://localhost:8000/api/v1/admin/datasets', 'per_page' => 20, 'to' => 20, 'total' => 24])]))])]
     public function adminDatasets(): void
     {
     }
 
-    #[OA\Get(path: '/api/v1/admin/datasets/{id}/export', tags: ['Admin'], summary: 'Export dataset', security: [['bearerAuth' => []]], parameters: [new OA\Parameter(name: 'id', in: 'path', required: true, schema: new OA\Schema(type: 'integer'))], responses: [new OA\Response(response: 200, description: 'OK', content: new OA\JsonContent(type: 'object', properties: [new OA\Property(property: 'dataset', type: 'object'), new OA\Property(property: 'annotations', type: 'array', items: new OA\Items(type: 'object'))]))])]
+    #[OA\Get(path: '/api/v1/admin/datasets/{id}/export', tags: ['Admin'], summary: 'Export dataset', security: [['bearerAuth' => []]], parameters: [new OA\Parameter(name: 'id', in: 'path', required: true, schema: new OA\Schema(type: 'integer'))], responses: [new OA\Response(response: 200, description: 'OK', content: new OA\JsonContent(type: 'object', properties: [new OA\Property(property: 'dataset', type: 'object', example: ['id' => 4, 'nom' => 'Dataset initial', 'description' => 'Jeu de donnees de validation', 'version' => '1.0', 'nb_images' => 120, 'nb_annotations_validees' => 300, 'format_export' => 'json', 'created_at' => '2026-04-21T12:00:00.000000Z']), new OA\Property(property: 'annotations', type: 'array', items: new OA\Items(type: 'object', example: ['id' => 98, 'tache_id' => 12, 'utilisateur_id' => 5, 'reponse_choisie' => 'chat', 'temps_execution_ms' => 1850, 'created_at' => '2026-04-23T10:00:00.000000Z']))]))])]
     public function adminDatasetExport(): void
     {
     }
@@ -397,7 +535,7 @@ class ApiDocumentation
                 type: 'object'
             )
         ),
-        responses: [new OA\Response(response: 200, description: 'OK', content: new OA\JsonContent(type: 'object', properties: [new OA\Property(property: 'message', type: 'string', example: 'Configuration systeme mise a jour.'), new OA\Property(property: 'config', type: 'object')]))]
+        responses: [new OA\Response(response: 200, description: 'OK', content: new OA\JsonContent(type: 'object', properties: [new OA\Property(property: 'message', type: 'string', example: 'Configuration systeme mise a jour.'), new OA\Property(property: 'config', type: 'object', example: ['seuil_consensus' => 66, 'freq_sentinelle' => 10])]))]
     )]
     public function adminConfig(): void
     {
@@ -408,7 +546,7 @@ class ApiDocumentation
     {
     }
 
-    #[OA\Get(path: '/api/v1/sync/pull', tags: ['Sync'], summary: 'Sync pull', security: [['bearerAuth' => []]], responses: [new OA\Response(response: 200, description: 'OK', content: new OA\JsonContent(type: 'object', properties: [new OA\Property(property: 'server_timestamp', type: 'string', format: 'date-time', example: '2026-04-23T10:00:00Z'), new OA\Property(property: 'tasks', type: 'array', items: new OA\Items(type: 'object')), new OA\Property(property: 'transactions', type: 'array', items: new OA\Items(type: 'object'))]))])]
+    #[OA\Get(path: '/api/v1/sync/pull', tags: ['Sync'], summary: 'Sync pull', security: [['bearerAuth' => []]], responses: [new OA\Response(response: 200, description: 'OK', content: new OA\JsonContent(type: 'object', properties: [new OA\Property(property: 'server_timestamp', type: 'string', format: 'date-time', example: '2026-04-23T10:00:00Z'), new OA\Property(property: 'tasks', type: 'array', items: new OA\Items(type: 'object', example: ['id' => 12, 'type_tache' => 'classification_image', 'question' => 'Que montre cette image ?', 'options_reponse' => ['chat', 'chien', 'voiture'], 'nb_annotations_requises' => 3, 'statut' => 'en_cours', 'is_sentinelle' => false, 'image' => ['id' => 42, 'url_stockage' => 'images/task-42.jpg', 'url' => 'http://localhost/storage/images/task-42.jpg', 'categorie' => 'animaux'], 'annotations_count' => 2, 'created_at' => '2026-04-22T09:30:00.000000Z'])), new OA\Property(property: 'transactions', type: 'array', items: new OA\Items(type: 'object', example: ['id' => 501, 'utilisateur_id' => 5, 'annotation_id' => 98, 'type' => 'gain', 'libelle' => 'Recompense annotation', 'montant' => 250, 'solde_avant' => 1250, 'solde_apres' => 1500, 'reference_tache' => 'task:12', 'created_at' => '2026-04-23T10:00:00.000000Z']))]))])]
     public function syncPull(): void
     {
     }
