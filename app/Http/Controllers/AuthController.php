@@ -34,8 +34,10 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'Inscription reussie.',
             'token_type' => 'Bearer',
-            'access_token' => $token,
-            'user' => UserResource::make($user),
+            'user' => array_merge(
+                UserResource::make($user)->resolve(),
+                ['access_token' => $token]
+            ),
         ], 201);
     }
 
